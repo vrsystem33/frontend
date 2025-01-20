@@ -1,0 +1,29 @@
+:host ::ng-deep .pi-eye,
+:host ::ng-deep .pi-eye-slash {
+    transform: scale(1.6);
+    margin-right: 1rem;
+    color: var(--primary-color) !important;
+}
+
+.auth-wrapper {
+    background: linear-gradient(45deg, #4FC3F7, #000000);
+}
+
+.border-auth {
+    border-radius: 56px;
+    padding: 0.1rem;
+    background: linear-gradient(212deg, #000000 20%, #4FC3F7 100%);
+}
+
+button#enter {
+    background: linear-gradient(45deg, #1e7aa5, #000000);
+    opacity: 1;
+}
+
+button#enter:hover {
+    opacity: 0.8;
+}
+
+.disabled-btn {
+    opacity: 0.8 !important;
+}
