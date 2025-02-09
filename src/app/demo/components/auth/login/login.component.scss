@@ -1,29 +1,49 @@
-:host ::ng-deep .pi-eye,
-:host ::ng-deep .pi-eye-slash {
-    transform: scale(1.6);
-    margin-right: 1rem;
-    color: var(--primary-color) !important;
-}
-
+// Wrapper cobrindo toda a tela
 .auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100vw;
     background: linear-gradient(45deg, #4FC3F7, #000000);
+    padding: 1rem;
 }
 
-.border-auth {
-    border-radius: 56px;
-    padding: 0.1rem;
-    background: linear-gradient(212deg, #000000 20%, #4FC3F7 100%);
+// Estilizando os inputs
+input,
+:host ::ng-deep .p-password input {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    background: transparent;
+    transition: border-color 0.3s ease-in-out;
 }
 
+input:focus,
+:host ::ng-deep .p-password input:focus {
+    border-bottom: 1px solid var(--primary-color);
+}
+
+// Ajustando o espaço dos labels
+label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+// Botão de login estilizado
 button#enter {
     background: linear-gradient(45deg, #1e7aa5, #000000);
     opacity: 1;
+    font-size: 1rem;
+    border-radius: 8px;
 }
 
 button#enter:hover {
-    opacity: 0.8;
-}
-
-.disabled-btn {
-    opacity: 0.8 !important;
+    opacity: 0.85;
 }

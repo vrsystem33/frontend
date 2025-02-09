@@ -88,7 +88,7 @@ export class LoginComponent {
         this.loading = true;
 
         this.service.login(form.value).then(res => {
-            this.store.dispatch(login({ token: res.access_token }));
+            this.store.dispatch(login({ token: res.token }));
 
             if (this.returnUrl && this.returnUrl != '/restricted/dashboard') this.router.navigate([this.returnUrl]);
             else this.router.navigate(['/restricted/dashboard']);
