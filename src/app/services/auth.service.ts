@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { firstValueFrom, Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 
 @Injectable({
@@ -14,8 +14,12 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  login(dados: any): Promise<any> {
-    return this.http.post(`${this.base_url}/oauth/login`, dados).toPromise();
+  // login(dados: any): Promise<any> {
+  //   return this.http.post(`${this.base_url}/oauth/login`, dados).toPromise();
+  // }
+
+  async login(dados: any): Promise<any> {
+    return firstValueFrom(this.http.post(`${this.base_url}/oauth/login`, dados));
   }
 
   getUserByToken(queryParams: any = {}): Observable<any> {
