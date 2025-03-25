@@ -11,21 +11,30 @@ export class ForgotPasswordComponent {
 
     message: string = '';
     errorMessage: string = '';
+    isLoading: boolean = false;
 
-    constructor(private authService: AuthService) { }
+    constructor(
+        private authService: AuthService
+
+    ) { }
 
     onSubmit(form: NgForm) {
         if (!form.valid) return;
 
+        this.isLoading = true;
         const email = form.value.email;
 
         this.authService.passwordRecovery({ email }).subscribe({
-            next: (res) => {
-                this.message = 'Link de recuperação enviado! Verifique seu e-mail.';
+            next: () => {
+                // message generic
+                this.message = 'Se o e-mail estiver cadastrado, você receberá um link de recuperação.';
+                this.isLoading = false;
                 form.reset();
             },
-            error: (err) => {
-                this.errorMessage = 'Erro ao enviar o link. Tente novamente mais tarde.';
+            error: () => {
+                // message generic
+                this.message = 'Se o e-mail estiver cadastrado, você receberá um link de recuperação.';
+                this.isLoading = false;
             }
         });
     }

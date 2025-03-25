@@ -81,24 +81,43 @@ export class LoginComponent {
     //         );
     // }
 
-    onSubmit(form: NgForm) {
+    // onSubmit(form: NgForm) {
 
+    //     if (!form.valid) return;
+
+    //     this.loading = true;
+
+    //     this.service.login(form.value).then(res => {
+    //         this.store.dispatch(login({ token: res.token }));
+
+    //         if (this.returnUrl && this.returnUrl != '/restricted/dashboard') this.router.navigate([this.returnUrl]);
+    //         else this.router.navigate(['/restricted/dashboard']);
+
+    //     })
+    //         .catch(err => console.error(err))
+    //         .finally(() => this.loading = false)
+    // }
+
+    onSubmit(form: NgForm) {
         if (!form.valid) return;
 
         this.loading = true;
 
-        this.service.login(form.value).then(res => {
-            this.store.dispatch(login({ token: res.token }));
+        //changing from 'then'/'catch' to 'subscribe'
+        this.service.login(form.value).subscribe({
+            next: (res) => {
+                // if success login
+                this.store.dispatch(login({ token: res.token }));
 
-            if (this.returnUrl && this.returnUrl != '/restricted/dashboard') this.router.navigate([this.returnUrl]);
-            else this.router.navigate(['/restricted/dashboard']);
+                if (this.returnUrl && this.returnUrl !== '/restricted/dashboard') { this.router.navigate([this.returnUrl]); }
 
-        })
-            .catch(err => console.error(err))
-            .finally(() => this.loading = false)
+                else { this.router.navigate(['/restricted/dashboard']); }
+            },
+            error: (err) => { console.error(err); },
+
+            complete: () => { this.loading = false; }
+        });
     }
 
-    forgotPassword() {
-        this.router.navigate(['/auth/forgot-password']);
-    }
+    forgotPassword() { this.router.navigate(['/auth/forgot-password']); }
 }
