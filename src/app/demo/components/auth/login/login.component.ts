@@ -97,4 +97,8 @@ export class LoginComponent {
             .catch(err => console.error(err))
             .finally(() => this.loading = false)
     }
+
+    forgotPassword() {
+        this.router.navigate(['/auth/forgot-password']);
+    }
 }

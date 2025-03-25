@@ -29,4 +29,8 @@ export class AuthService {
   logout(): Observable<any> {
     return this.http.post(`${this.base_url}/oauth/logout`, {});
   }
+
+  passwordRecovery(dados: { email: string }): Observable<any> {
+    return this.http.post(`${this.base_url}/oauth/password-recovery`, dados);
+  }
 }
