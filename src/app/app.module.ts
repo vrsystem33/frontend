@@ -27,6 +27,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask'
 import { HttpProgressInterceptor } from './helpers/http-progress.interceptor';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(localeBr, 'br', localeBrExtra);
 
@@ -36,9 +37,15 @@ registerLocaleData(localeBr, 'br', localeBrExtra);
         NotfoundComponent
     ],
     imports: [
+        BrowserAnimationsModule,
         AppRoutingModule,
         AppLayoutModule,
-        ToastrModule.forRoot(),
+        ToastrModule.forRoot({
+        timeOut: 4000,
+        positionClass: 'toast-top-center',
+        preventDuplicates: true,
+        progressBar: true
+        }),
         NgxMaskDirective,
 
         StoreModule.forRoot(reducers, {
