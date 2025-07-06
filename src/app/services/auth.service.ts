@@ -33,4 +33,8 @@ export class AuthService {
     passwordRecovery(dados: { email: string }): Observable<any> {
         return this.http.post(`${this.base_url}/oauth/password-recovery`, dados);
     }
+
+    passwordReset(data: any) {
+        return this.http.post(`${this.base_url}/oauth/password-reset`, data);
+    }
 }
