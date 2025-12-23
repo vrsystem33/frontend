@@ -9,6 +9,17 @@
     padding: 1rem;
 }
 
+.border-auth {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 28rem;
+}
+
+.surface-card {
+    width: 100%;
+}
+
 // Estilizando os inputs
 input,
 :host ::ng-deep .p-password input {

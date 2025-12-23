@@ -14,13 +14,15 @@ import { login } from 'src/app/core/actions/auth.action';
 })
 export class LoginComponent {
 
-    valCheck: string[] = ['remember'];
+    // valCheck: string[] = ['remember'];
 
     password!: string;
 
     returnUrl: string = null;
 
     loading: boolean = false;
+
+    rememberme: boolean = true;
 
     constructor(
         public layoutService: LayoutService,
@@ -36,54 +38,15 @@ export class LoginComponent {
                 this.returnUrl = params.get('returnUrl');
             }
         });
+
+        this.rememberme = localStorage.getItem('rememberme') == 'true';
     }
-
-    // onSubmit(form: NgForm) {
-
-    //     if (!form.valid) {
-    //         return false;
-    //     }
-
-    //     if (this.dados.lembrarLogin) {
-    //         localStorage.setItem('lembrarLogin', this.dados.login);
-    //     }
-
-    //     if (this.loadingError) {
-    //         this.loadingError = false;
-    //     }
-
-    //     this.loading = true;
-
-    //     this.service.login(this.dados.login, this.dados.password).pipe(first())
-    //         .subscribe(
-    //             (res) => {
-    //                 if (res == undefined) {
-    //                     return this.errorLogin();
-    //                 }
-
-    //                 this.store.dispatch(new Login({ token: res.token }));
-    //                 localStorage.setItem(environment.tema, res.tema);
-
-    //                 const welcome: string = `Bem - Vindo ${res.name},`;
-    //                 const message: string = this.getMessage();
-    //                 this.message.toastSuccess(message, welcome);
-
-    //                 this.loading = false;
-    //                 this.loadingOk = true;
-
-    //                 setTimeout(() => {
-    //                     this.router.navigate(['/restricted']);
-    //                 }, 1500);
-    //             },
-    //             error => {
-    //                 this.errorLogin();
-    //             }
-    //         );
-    // }
 
     onSubmit(form: NgForm) {
 
         if (!form.valid) return;
+
+        localStorage.setItem('rememberme', this.rememberme.toString());
 
         this.loading = true;
 
@@ -94,7 +57,22 @@ export class LoginComponent {
             else this.router.navigate(['/restricted/dashboard']);
 
         })
-            .catch(err => console.error(err))
-            .finally(() => this.loading = false)
+        .catch(err => console.error(err))
+        .finally(() => this.loading = false);
+    }
+
+    checkRemember(event: Event): void {
+        // Previne o comportamento padrão do evento, se necessário
+        event.preventDefault();
+    
+        // Altera o valor de rememberme
+        this.rememberme = !this.rememberme;
+    
+        // Salva o valor no localStorage, se necessário
+        localStorage.setItem('rememberme', this.rememberme.toString());
+    
+        // Exibe o evento no console para depuração
+        console.log('Evento de clique capturado:', event);
+        console.log('Valor de rememberme:', this.rememberme);
     }
 }

@@ -18,8 +18,8 @@
 
                         <div class="flex align-items-center justify-content-between mb-4">
                             <div class="flex align-items-center">
-                                <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>
-                                <label for="rememberme1">Lembrar-me</label>
+                                <p-checkbox id="rememberme" name="rememberme" [binary]="true" styleClass="mr-2" [(ngModel)]="rememberme"></p-checkbox>
+                                <label for="rememberme">Lembrar-me</label>
                             </div>
                             <a class="font-medium no-underline text-right cursor-pointer"
                                 style="color: var(--primary-color)">Esqueceu a senha?</a>
